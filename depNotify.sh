@@ -1,5 +1,5 @@
 #!/bin/bash
-# Version 2.0.7
+# Version 2.0.8
 
 #########################################################################################
 # License information
@@ -603,15 +603,15 @@ TRIGGER="event"
     if [ "$TESTING_MODE" = true ] && [ -f "$DEP_NOTIFY_USER_INPUT_PLIST" ]; then rm "$DEP_NOTIFY_USER_INPUT_PLIST"; fi
 
   # Setting default path to the plist which stores all the user completed info
-    /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" pathToPlistFile "$DEP_NOTIFY_USER_INPUT_PLIST"
+    /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" pathToPlistFile -string "$DEP_NOTIFY_USER_INPUT_PLIST"
 
   # Setting status text alignment
     /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" statusTextAlignment "$STATUS_TEXT_ALIGN"
 
   # Setting help button
     if [ "$HELP_BUBBLE_TITLE" != "" ]; then
-      /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" helpBubble -array-add "$HELP_BUBBLE_TITLE"
-      /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" helpBubble -array-add "$HELP_BUBBLE_BODY"
+      /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" helpBubble -array-add -string "$HELP_BUBBLE_TITLE"
+      /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" helpBubble -array-add -string "$HELP_BUBBLE_BODY"
     fi
 
 # EULA Configuration
@@ -622,9 +622,9 @@ TRIGGER="event"
       if [ "$TESTING_MODE" = true ] && [ -f "$DEP_NOTIFY_EULA_DONE" ]; then rm "$DEP_NOTIFY_EULA_DONE"; fi
 
     # Writing title, subtitle, and EULA txt location to plist
-      /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" EULAMainTitle "$EULA_MAIN_TITLE"
-      /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" EULASubTitle "$EULA_SUBTITLE"
-      /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" pathToEULA "$EULA_FILE_PATH"
+      /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" EULAMainTitle -string "$EULA_MAIN_TITLE"
+      /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" EULASubTitle -string "$EULA_SUBTITLE"
+      /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" pathToEULA -string "$EULA_FILE_PATH"
 
     # Setting ownership of EULA file
       chown "$CURRENT_USER:staff" "$EULA_FILE_PATH"
@@ -639,87 +639,87 @@ TRIGGER="event"
       if [ "$TESTING_MODE" = true ] && [ -f "$DEP_NOTIFY_REGISTER_DONE" ]; then rm "$DEP_NOTIFY_REGISTER_DONE"; fi
 
     # Main Window Text Configuration
-      /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" registrationMainTitle "$REGISTRATION_TITLE"
-      /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" registrationButtonLabel "$REGISTRATION_BUTTON"
-      /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" registrationPicturePath "$BANNER_IMAGE_PATH"
+      /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" registrationMainTitle -string "$REGISTRATION_TITLE"
+      /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" registrationButtonLabel -string "$REGISTRATION_BUTTON"
+      /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" registrationPicturePath -string "$BANNER_IMAGE_PATH"
 
     # First Text Box Configuration
       if [ "$REG_TEXT_LABEL_1" != "" ]; then
-        /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" textField1Label "$REG_TEXT_LABEL_1"
-        /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" textField1Placeholder "$REG_TEXT_LABEL_1_PLACEHOLDER"
+        /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" textField1Label -string "$REG_TEXT_LABEL_1"
+        /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" textField1Placeholder -string "$REG_TEXT_LABEL_1_PLACEHOLDER"
         /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" textField1IsOptional "$REG_TEXT_LABEL_1_OPTIONAL"
         # Code for showing the help box if configured
           if [ "$REG_TEXT_LABEL_1_HELP_TITLE" != "" ]; then
-              /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" textField1Bubble -array-add "$REG_TEXT_LABEL_1_HELP_TITLE"
-              /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" textField1Bubble -array-add "$REG_TEXT_LABEL_1_HELP_TEXT"
+              /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" textField1Bubble -array-add -string "$REG_TEXT_LABEL_1_HELP_TITLE"
+              /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" textField1Bubble -array-add -string "$REG_TEXT_LABEL_1_HELP_TEXT"
           fi
       fi
 
     # Second Text Box Configuration
       if [ "$REG_TEXT_LABEL_2" != "" ]; then
-        /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" textField2Label "$REG_TEXT_LABEL_2"
-        /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" textField2Placeholder "$REG_TEXT_LABEL_2_PLACEHOLDER"
+        /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" textField2Label -string "$REG_TEXT_LABEL_2"
+        /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" textField2Placeholder -string "$REG_TEXT_LABEL_2_PLACEHOLDER"
         /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" textField2IsOptional "$REG_TEXT_LABEL_2_OPTIONAL"
         # Code for showing the help box if configured
           if [ "$REG_TEXT_LABEL_2_HELP_TITLE" != "" ]; then
-              /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" textField2Bubble -array-add "$REG_TEXT_LABEL_2_HELP_TITLE"
-              /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" textField2Bubble -array-add "$REG_TEXT_LABEL_2_HELP_TEXT"
+              /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" textField2Bubble -array-add -string "$REG_TEXT_LABEL_2_HELP_TITLE"
+              /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" textField2Bubble -array-add -string "$REG_TEXT_LABEL_2_HELP_TEXT"
           fi
       fi
 
     # Popup 1
       if [ "$REG_POPUP_LABEL_1" != "" ]; then
-        /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupButton1Label "$REG_POPUP_LABEL_1"
+        /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupButton1Label -string "$REG_POPUP_LABEL_1"
         # Code for showing the help box if configured
           if [ "$REG_POPUP_LABEL_1_HELP_TITLE" != "" ]; then
-            /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupMenu1Bubble -array-add "$REG_POPUP_LABEL_1_HELP_TITLE"
-            /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupMenu1Bubble -array-add "$REG_POPUP_LABEL_1_HELP_TEXT"
+            /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupMenu1Bubble -array-add -string "$REG_POPUP_LABEL_1_HELP_TITLE"
+            /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupMenu1Bubble -array-add -string "$REG_POPUP_LABEL_1_HELP_TEXT"
           fi
         # Code for adding the items from the array above into the plist
           for REG_POPUP_LABEL_1_OPTION in "${REG_POPUP_LABEL_1_OPTIONS[@]}"; do
-             /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupButton1Content -array-add "$REG_POPUP_LABEL_1_OPTION"
+             /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupButton1Content -array-add -string "$REG_POPUP_LABEL_1_OPTION"
           done
       fi
 
     # Popup 2
       if [ "$REG_POPUP_LABEL_2" != "" ]; then
-        /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupButton2Label "$REG_POPUP_LABEL_2"
+        /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupButton2Label -string "$REG_POPUP_LABEL_2"
         # Code for showing the help box if configured
           if [ "$REG_POPUP_LABEL_2_HELP_TITLE" != "" ]; then
-            /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupMenu2Bubble -array-add "$REG_POPUP_LABEL_2_HELP_TITLE"
-            /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupMenu2Bubble -array-add "$REG_POPUP_LABEL_2_HELP_TEXT"
+            /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupMenu2Bubble -array-add -string "$REG_POPUP_LABEL_2_HELP_TITLE"
+            /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupMenu2Bubble -array-add -string "$REG_POPUP_LABEL_2_HELP_TEXT"
           fi
         # Code for adding the items from the array above into the plist
           for REG_POPUP_LABEL_2_OPTION in "${REG_POPUP_LABEL_2_OPTIONS[@]}"; do
-             /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupButton2Content -array-add "$REG_POPUP_LABEL_2_OPTION"
+             /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupButton2Content -array-add -string "$REG_POPUP_LABEL_2_OPTION"
           done
       fi
 
     # Popup 3
       if [ "$REG_POPUP_LABEL_3" != "" ]; then
-        /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupButton3Label "$REG_POPUP_LABEL_3"
+        /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupButton3Label -string "$REG_POPUP_LABEL_3"
         # Code for showing the help box if configured
           if [ "$REG_POPUP_LABEL_3_HELP_TITLE" != "" ]; then
-            /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupMenu3Bubble -array-add "$REG_POPUP_LABEL_3_HELP_TITLE"
-            /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupMenu3Bubble -array-add "$REG_POPUP_LABEL_3_HELP_TEXT"
+            /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupMenu3Bubble -array-add -string "$REG_POPUP_LABEL_3_HELP_TITLE"
+            /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupMenu3Bubble -array-add -string "$REG_POPUP_LABEL_3_HELP_TEXT"
           fi
         # Code for adding the items from the array above into the plist
           for REG_POPUP_LABEL_3_OPTION in "${REG_POPUP_LABEL_3_OPTIONS[@]}"; do
-             /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupButton3Content -array-add "$REG_POPUP_LABEL_3_OPTION"
+             /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupButton3Content -array-add -string "$REG_POPUP_LABEL_3_OPTION"
           done
       fi
 
     # Popup 4
       if [ "$REG_POPUP_LABEL_4" != "" ]; then
-        /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupButton4Label "$REG_POPUP_LABEL_4"
+        /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupButton4Label -string "$REG_POPUP_LABEL_4"
         # Code for showing the help box if configured
           if [ "$REG_POPUP_LABEL_4_HELP_TITLE" != "" ]; then
-            /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupMenu4Bubble -array-add "$REG_POPUP_LABEL_4_HELP_TITLE"
-            /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupMenu4Bubble -array-add "$REG_POPUP_LABEL_4_HELP_TEXT"
+            /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupMenu4Bubble -array-add -string "$REG_POPUP_LABEL_4_HELP_TITLE"
+            /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupMenu4Bubble -array-add -string "$REG_POPUP_LABEL_4_HELP_TEXT"
           fi
         # Code for adding the items from the array above into the plist
           for REG_POPUP_LABEL_4_OPTION in "${REG_POPUP_LABEL_4_OPTIONS[@]}"; do
-             /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupButton4Content -array-add "$REG_POPUP_LABEL_4_OPTION"
+             /usr/bin/defaults write "$DEP_NOTIFY_CONFIG_PLIST" popupButton4Content -array-add -string "$REG_POPUP_LABEL_4_OPTION"
           done
       fi
   fi
